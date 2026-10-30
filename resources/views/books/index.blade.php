@@ -83,6 +83,29 @@
         <a href="{{ route('books.create') }}" class="add-button">
             + Add Book
         </a>
+        <!-- Filter Books by Status -->
+<div style="margin-top: 25px; margin-bottom: 20px;">
+
+    <a href="{{ route('books.index') }}"
+       style="margin-right: 15px;">
+        All Books
+    </a>
+
+    <a href="{{ route('books.index', ['status' => 'to-read']) }}"
+       style="margin-right: 15px;">
+        To Read
+    </a>
+
+    <a href="{{ route('books.index', ['status' => 'reading']) }}"
+       style="margin-right: 15px;">
+        Reading
+    </a>
+
+    <a href="{{ route('books.index', ['status' => 'finished']) }}">
+        Finished
+    </a>
+
+</div>
 
         <!-- Success Message -->
         @if(session('success'))

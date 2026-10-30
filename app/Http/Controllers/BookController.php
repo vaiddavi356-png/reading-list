@@ -8,12 +8,20 @@ use Illuminate\Validation\Rule;
 
 class BookController extends Controller
 {
-    public function index()
-    {
-        $books = Book::all();
+    public function index(Request $request)
+{
+    $status = $request->query('status');
 
-        return view('books.index', compact('books'));
+    $query = Book::query();
+
+    if (in_array($status, ['to-read', 'reading', 'finished'], true)) {
+        $query->where('status', $status);
     }
+
+    $books = $query->get();
+
+    return view('books.index', compact('books', 'status'));
+}
 
     public function create()
     {
