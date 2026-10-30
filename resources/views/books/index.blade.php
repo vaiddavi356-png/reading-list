@@ -117,8 +117,22 @@
                                 {{ ucfirst(str_replace('-', ' ', $book->status)) }}
                             </td>
                             <td>
-                       <a href="{{ route('books.edit', $book) }}">Edit</a>
-                            </td>
+    <a href="{{ route('books.edit', $book) }}">Edit</a>
+
+    <form
+        action="{{ route('books.destroy', $book) }}"
+        method="POST"
+        style="display: inline;"
+        onsubmit="return confirm('Are you sure?');"
+    >
+        @csrf
+        @method('DELETE')
+
+        <button type="submit" style="background: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">
+            Delete
+        </button>
+    </form>
+</td>
                         </tr>
                     @endforeach
                 </tbody>
