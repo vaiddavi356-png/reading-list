@@ -104,6 +104,7 @@
                         <th>Title</th>
                         <th>Author</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
 
@@ -114,6 +115,9 @@
                             <td>{{ $book->author }}</td>
                             <td>
                                 {{ ucfirst(str_replace('-', ' ', $book->status)) }}
+                            </td>
+                            <td>
+                       <a href="{{ route('books.edit', $book) }}">Edit</a>
                             </td>
                         </tr>
                     @endforeach
