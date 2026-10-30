@@ -1,11 +1,9 @@
 <?php
-
-
-
 namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class BookController extends Controller
 {
@@ -14,5 +12,24 @@ class BookController extends Controller
         $books = Book::all();
 
         return view('books.index', compact('books'));
+    }
+
+    public function create()
+    {
+        return view('books.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'author' => ['required', 'string', 'max:255'],
+            'status' => ['required', Rule::in(['to-read', 'reading', 'finished'])],
+        ]);
+
+        Book::create($validated);
+
+        return redirect()->route('books.index')
+            ->with('success', 'Book added successfully!');
     }
 }

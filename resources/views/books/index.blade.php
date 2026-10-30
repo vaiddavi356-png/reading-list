@@ -27,6 +27,28 @@
             text-align: center;
         }
 
+        .add-button {
+            display: inline-block;
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+
+        .add-button:hover {
+            background-color: #1a252f;
+        }
+
+        .success {
+            color: green;
+            background-color: #e8f8ef;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -57,9 +79,25 @@
 
         <h1>📚 My Reading List</h1>
 
+        <!-- Add Book Button -->
+        <a href="{{ route('books.create') }}" class="add-button">
+            + Add Book
+        </a>
+
+        <!-- Success Message -->
+        @if(session('success'))
+            <p class="success">
+                {{ session('success') }}
+            </p>
+        @endif
+
+        <!-- Display Books -->
         @if($books->isEmpty())
+
             <p class="empty">No books added yet.</p>
+
         @else
+
             <table>
                 <thead>
                     <tr>
@@ -81,6 +119,7 @@
                     @endforeach
                 </tbody>
             </table>
+
         @endif
 
     </div>
